@@ -1,8 +1,8 @@
 package model;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+
 import java.util.Calendar;
-import java.util.List;
 
 public class TimeCard {
 
@@ -13,6 +13,27 @@ public class TimeCard {
 		super();
 		this.checkin = checkin;
 		this.checkout = checkout;
+	}
+
+	public TimeCard(String checkinStr, String checkoutStr) {
+		Calendar cckin = Calendar.getInstance();
+		try {
+			cckin.setTime(Employee.dateFormat.parse(checkinStr));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Calendar cckout = Calendar.getInstance();
+		try {
+			cckout.setTime(Employee.dateFormat.parse(checkoutStr));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		this.checkin = cckin;
+		this.checkout = cckout;
 	}
 
 	public Calendar getCheckin() {
@@ -29,6 +50,13 @@ public class TimeCard {
 
 	public void setCheckout(Calendar checkout) {
 		this.checkout = checkout;
+	}
+
+	public double getWorkHours() {
+		double milliseconds = checkout.getTimeInMillis()
+				- checkin.getTimeInMillis();
+		double hours = ((milliseconds / (1000 * 60 * 60)));
+		return hours;
 	}
 
 }

@@ -12,6 +12,17 @@ public class SyndicateEmployee {
 	private int EmployeeId;
 	private double monthlyfee;
 	private double deduction;
+	
+	
+	public SyndicateEmployee(int employeeId, double monthlyfee, double deduction) {
+		super();
+		EmployeeId = employeeId;
+		this.monthlyfee = monthlyfee;
+		this.deduction = deduction;
+		this.id = getNextId();
+	}
+	
+	
 	public static List<SyndicateEmployee> getSyndicateEmployees() {
 		return syndicateEmployees;
 	}
@@ -47,6 +58,19 @@ public class SyndicateEmployee {
 		int current = nextId;
 		nextId++;
 		return current;
+	}
+	
+	public static SyndicateEmployee getByEmployeeId(int id)
+	{
+		for(SyndicateEmployee entrie: syndicateEmployees)
+		{
+			if(entrie.getEmployeeId()==id)
+			{
+				return entrie;
+			}
+		}
+		
+		return null;
 	}
 	
 	
