@@ -1,10 +1,12 @@
 package test;
 
+import java.io.ObjectInputStream.GetField;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Scanner;
 
 import util.CalendarOperations;
+import model.ComissionedEmployee;
 import model.Employee;
 import model.HourlyEmplyee;
 import model.PaymentMethod;
@@ -17,7 +19,17 @@ import US.UserStore;
 public class Main {
 
 	public static void main(String[] args) {
-		 // TODO Auto-generated method stub
+
+		
+//		SalaraiedEmployee emp1 = new SalaraiedEmployee("abc", "adress", PaymentMethod.DESPOSIT, Calendar.getInstance(), 1055);
+//		SalaraiedEmployee emp2 = emp1.clone();
+//		
+//		
+//		
+//		
+//		Calendar c1 = Calendar.getInstance();
+//		Calendar c2 = c1;
+//		
 		
 		 HourlyEmplyee employee = new HourlyEmplyee("a", "a",
 		 PaymentMethod.DESPOSIT,
@@ -44,22 +56,22 @@ public class Main {
 		 System.out.println(employee.getLiquidSalary());
 		 Employee.addEmployee(employee);
 		
-		 // System.out.println(employee.getLiquidSalary());
-		 // System.out.println(timeC.getWorkHours());
-		 // System.out.println(employee.getAdmissionDate().getTime());
-		 // System.out.println(cckin.get(Calendar.FRIDAY));
-		 // int teste = cckin.get(Calendar.FRIDAY);
-		 // cckin.set(Calendar.DAY_OF_YEAR, teste);
-		 // System.out.println(cckin.getTime());
-		 // employee.pay();
-		 // System.out.println(employee.getNextPayDate().getTime());
-		 // employee.pay();
-		 // System.out.println(employee.getNextPayDate().getTime());
+//		  System.out.println(employee.getLiquidSalary());
+//		  System.out.println(timeC.getWorkHours());
+//		  System.out.println(employee.getAdmissionDate().getTime());
+//		  System.out.println(cckin.get(Calendar.FRIDAY));
+//		  int teste = cckin.get(Calendar.FRIDAY);
+//		  cckin.set(Calendar.DAY_OF_YEAR, teste);
+//		  System.out.println(cckin.getTime());
+//		  employee.pay();
+//		  System.out.println(employee.getNextPayDate().getTime());
+//		  employee.pay();
+//		  System.out.println(employee.getNextPayDate().getTime());
 		
 		 String payDayStr = "19/09/2014 10:44:10";
 		 Calendar payDay = Calendar.getInstance();
 		 try {
-		 payDay.setTime(Employee.dateFormat.parse(payDayStr));
+		 payDay.setTime(CalendarOperations.dateFormat.parse(payDayStr));
 		 } catch (ParseException e) {
 		 // TODO Auto-generated catch block
 		 e.printStackTrace();
@@ -148,6 +160,21 @@ public class Main {
 				break;
 			case 15: UndoRedo.redoAction();
 
+				break;
+			case 16:
+				{
+//					int id = scan.nextInt();
+//					if(Employee.findEmployeeById(id)!=null)
+//					{
+//						System.out.println(Employee.findEmployeeById(id).getName());
+//					}
+					
+					for(Employee emp: Employee.getEmployees())
+					{
+						System.out.println(emp.getName());
+					}
+					
+				}
 				break;
 
 			default:

@@ -1,8 +1,9 @@
 package model;
 
 import java.text.ParseException;
-
 import java.util.Calendar;
+
+import util.CalendarOperations;
 
 public class TimeCard {
 
@@ -18,7 +19,7 @@ public class TimeCard {
 	public TimeCard(String checkinStr, String checkoutStr) {
 		Calendar cckin = Calendar.getInstance();
 		try {
-			cckin.setTime(Employee.dateFormat.parse(checkinStr));
+			cckin.setTime(CalendarOperations.dateFormat.parse(checkinStr));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -26,7 +27,7 @@ public class TimeCard {
 
 		Calendar cckout = Calendar.getInstance();
 		try {
-			cckout.setTime(Employee.dateFormat.parse(checkoutStr));
+			cckout.setTime(CalendarOperations.dateFormat.parse(checkoutStr));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,6 +58,13 @@ public class TimeCard {
 				- checkin.getTimeInMillis();
 		double hours = ((milliseconds / (1000 * 60 * 60)));
 		return hours;
+	}
+
+	public TimeCard clone() {
+		TimeCard cloned = new TimeCard((Calendar) this.getCheckin().clone(),
+				(Calendar) this.getCheckout().clone());
+
+		return cloned;
 	}
 
 }

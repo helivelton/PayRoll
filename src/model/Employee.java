@@ -1,19 +1,17 @@
 package model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import java.util.List;
 
 
-public abstract class Employee {
+public abstract class Employee implements Cloneable {
 	
 	private static List<Employee> employees = new ArrayList<Employee>();
 	private static int nextId = 0;
 	private static int nextSyndicateId = 0;
-	public static SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"dd/MM/yyyy HH:mm:ss");
+	//public static SimpleDateFormat dateFormat = new SimpleDateFormat(
+	//		"dd/MM/yyyy HH:mm:ss");
 	
 	private int id;
 	private int syndicateId;
@@ -27,15 +25,44 @@ public abstract class Employee {
 	private double monthlyFee=0;
 	private double deduction=0;
 	
+	
+	public Employee(int id, int syndicateId, String name, String adress,
+			PaymentMethod paymentMethod, Calendar admissionDate,
+			Calendar lastPayDate, Calendar nextPayDate, boolean isOnSyndicate,
+			double monthlyFee, double deduction) {
+		super();
+		
+		System.out.println(admissionDate.getTime());
+		System.out.println("a");
+		this.id = id;
+		this.syndicateId = syndicateId;
+		this.name = name;
+		this.adress = adress;
+		this.paymentMethod = paymentMethod;
+		this.admissionDate = admissionDate;
+		this.lastPayDate = lastPayDate;
+		this.nextPayDate = nextPayDate;
+		this.isOnSyndicate = isOnSyndicate;
+		this.monthlyFee = monthlyFee;
+		this.deduction = deduction;
+		
+	}
+
+
 	public Employee(String name, String adress,
 			PaymentMethod paymentMethod, Calendar admissionDate) {
 		super();
+		System.out.println("---------");
 		this.id = Employee.getNextId();
 		this.name = name;
 		this.adress = adress;
 		this.paymentMethod = paymentMethod;
 		this.admissionDate = admissionDate;
 		this.lastPayDate = admissionDate;
+		
+
+		System.out.println(admissionDate.getTime());
+		System.out.println(this.getAdmissionDate().getTime());
 		
 	}
 
@@ -209,4 +236,5 @@ public abstract class Employee {
 	
 	public abstract void pay();
 	
+
 }

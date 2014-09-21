@@ -6,25 +6,32 @@ public class SalaraiedEmployee extends Employee {
 
 	private double salary;
 
+	public SalaraiedEmployee(int id, int syndicateId, String name,
+			String adress, PaymentMethod paymentMethod, Calendar admissionDate,
+			Calendar lastPayDate, Calendar nextPayDate, boolean isOnSyndicate,
+			double monthlyFee, double deduction, double salary) {
+		super(id, syndicateId, name, adress, paymentMethod, admissionDate,
+				lastPayDate, nextPayDate, isOnSyndicate, monthlyFee, deduction);
+		this.salary = salary;
+	}
+
 	public SalaraiedEmployee(String name, String adress,
 			PaymentMethod paymentMethod, Calendar admissionDate, double salary) {
 		super(name, adress, paymentMethod, admissionDate);
+		
 		this.salary = salary;
-
-		Calendar nextPayDay = admissionDate;
-		System.out.println("here");
-		System.out.println(nextPayDay.getActualMaximum(Calendar.DATE));
+		Calendar nextPayDay = (Calendar)admissionDate.clone();
+		
 		nextPayDay.add(Calendar.DAY_OF_MONTH, 10);
-		
+
 		int lastWorkDay = nextPayDay.getActualMaximum(Calendar.DATE);
-		
+
 		nextPayDay.set(Calendar.DAY_OF_MONTH, lastWorkDay);
 
-		
 		while (nextPayDay.get(Calendar.DAY_OF_WEEK) == 7
 				|| nextPayDay.get(Calendar.DAY_OF_WEEK) == 1) {
 			nextPayDay.add(Calendar.DAY_OF_MONTH, -1);
-			
+
 		}
 
 		this.setNextPayDate(nextPayDay);
@@ -60,11 +67,12 @@ public class SalaraiedEmployee extends Employee {
 
 		Calendar nextPayDay = this.getNextPayDate();
 		nextPayDay.add(Calendar.DATE, 10);
-		nextPayDay.set(Calendar.DAY_OF_MONTH, nextPayDay.getActualMaximum(Calendar.DAY_OF_MONTH));
+		nextPayDay.set(Calendar.DAY_OF_MONTH,
+				nextPayDay.getActualMaximum(Calendar.DAY_OF_MONTH));
 		while (nextPayDay.get(Calendar.DAY_OF_WEEK) == 7
 				|| nextPayDay.get(Calendar.DAY_OF_WEEK) == 1) {
 			nextPayDay.add(Calendar.DATE, -1);
-			
+
 		}
 
 		this.setNextPayDate(nextPayDay);
@@ -72,4 +80,16 @@ public class SalaraiedEmployee extends Employee {
 		this.setDeduction(0);
 	}
 
+	public SalaraiedEmployee clone() {
+		SalaraiedEmployee cloned;
+
+		cloned = new SalaraiedEmployee(this.getId(), this.getSyndicateId(),
+				this.getName(), this.getAdress(), this.getPaymentMethod(),
+				(Calendar) this.getAdmissionDate().clone(), (Calendar) this
+						.getLastPayDate().clone(), (Calendar) this
+						.getNextPayDate().clone(), this.isOnSyndicate(),
+				this.getMonthlyFee(), this.getDeduction(), this.getSalary());
+
+		return cloned;
+	}
 }

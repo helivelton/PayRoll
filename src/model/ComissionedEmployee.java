@@ -9,6 +9,18 @@ public class ComissionedEmployee extends SalaraiedEmployee {
 	private List<Sale> sales = new ArrayList<Sale>();
 	private double comission;
 
+	public ComissionedEmployee(int id, int syndicateId, String name,
+			String adress, PaymentMethod paymentMethod, Calendar admissionDate,
+			Calendar lastPayDate, Calendar nextPayDate, boolean isOnSyndicate,
+			double monthlyFee, double deduction, double salary,
+			List<Sale> sales, double comission) {
+		super(id, syndicateId, name, adress, paymentMethod, admissionDate,
+				lastPayDate, nextPayDate, isOnSyndicate, monthlyFee, deduction,
+				salary);
+		this.sales = sales;
+		this.comission = comission;
+	}
+
 	public ComissionedEmployee(String name, String adress,
 			PaymentMethod paymentMethod, Calendar admissionDate, double salary,
 			double comission) {
@@ -87,6 +99,26 @@ public class ComissionedEmployee extends SalaraiedEmployee {
 		this.setNextPayDate(nextPayDay);
 
 		this.setDeduction(0);
+	}
+
+	@Override
+	public ComissionedEmployee clone() {
+		ComissionedEmployee cloned;
+
+		List<Sale> clonedSales = new ArrayList<Sale>();
+		for (Sale sale : this.getSales()) {
+			clonedSales.add(sale.clone());
+		}
+
+		cloned = new ComissionedEmployee(this.getId(), this.getSyndicateId(),
+				this.getName(), this.getAdress(), this.getPaymentMethod(),
+				(Calendar) this.getAdmissionDate().clone(), (Calendar) this
+						.getLastPayDate().clone(),
+				(Calendar) this.getNextPayDate(), this.isOnSyndicate(),
+				this.getMonthlyFee(), this.getDeduction(), this.getSalary(),
+				clonedSales, this.getComission());
+
+		return cloned;
 	}
 
 }

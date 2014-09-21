@@ -2,13 +2,23 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import java.util.List;
 
 public class HourlyEmplyee extends Employee {
 
 	private double hourPrice;
 	private List<TimeCard> timeCards = new ArrayList<TimeCard>();
+
+	public HourlyEmplyee(int id, int syndicateId, String name, String adress,
+			PaymentMethod paymentMethod, Calendar admissionDate,
+			Calendar lastPayDate, Calendar nextPayDate, boolean isOnSyndicate,
+			double monthlyFee, double deduction, double hourPrice,
+			List<TimeCard> timeCards) {
+		super(id, syndicateId, name, adress, paymentMethod, admissionDate,
+				lastPayDate, nextPayDate, isOnSyndicate, monthlyFee, deduction);
+		this.hourPrice = hourPrice;
+		this.timeCards = timeCards;
+	}
 
 	public HourlyEmplyee(String name, String adress,
 			PaymentMethod paymentMethod, Calendar admissionDate,
@@ -98,4 +108,22 @@ public class HourlyEmplyee extends Employee {
 
 	}
 
+	public HourlyEmplyee clone() {
+		HourlyEmplyee cloned;
+
+		List<TimeCard> clonedTimeCards = new ArrayList<TimeCard>();
+
+		for (TimeCard timeCard : this.getTimeCards()) {
+			clonedTimeCards.add(timeCard.clone());
+		}
+
+		cloned = new HourlyEmplyee(this.getId(), this.getSyndicateId(),
+				this.getName(), this.getAdress(), this.getPaymentMethod(),
+				(Calendar) this.getAdmissionDate().clone(), (Calendar) this
+						.getLastPayDate().clone(), (Calendar) this
+						.getNextPayDate().clone(), this.isOnSyndicate(),
+				this.getMonthlyFee(), this.getDeduction(), this.getHourPrice(),
+				clonedTimeCards);
+		return cloned;
+	}
 }

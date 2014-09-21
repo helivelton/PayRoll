@@ -1,8 +1,6 @@
 package model;
 
-
 import java.util.Calendar;
-
 
 public class Sale {
 
@@ -29,6 +27,15 @@ public class Sale {
 
 	public void setSaleDate(Calendar saleDate) {
 		this.saleDate = saleDate;
+	}
+
+	public Sale clone() {
+		double value = this.getValue();
+		Calendar saleDate = (Calendar) this.getSaleDate().clone();
+
+		Sale cloned = new Sale(value, saleDate);
+
+		return cloned;
 	}
 
 }

@@ -2,7 +2,9 @@ package util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import model.Employee;
 
@@ -14,7 +16,7 @@ public class CalendarOperations {
 	{
 		Calendar calendarDate = Calendar.getInstance();
 		try {
-			calendarDate.setTime(Employee.dateFormat.parse(date));
+			calendarDate.setTime(dateFormat.parse(date));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,4 +24,15 @@ public class CalendarOperations {
 		
 		return calendarDate;
 	}
+	
+//	public static List<Employee> copyEmployeeList(List<Employee> lista)
+//	{
+//		List<Employee> copy = new ArrayList<Employee>();
+//		{
+//			for(Employee employee: Employee.getEmployees())
+//			{
+//				
+//			}
+//		}
+//	}
 }
