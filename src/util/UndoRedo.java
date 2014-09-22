@@ -1,13 +1,13 @@
-package US;
+package util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import model.ComissionedEmployee;
+import model.CommissionedEmployee;
 import model.Employee;
-import model.HourlyEmplyee;
-import model.SalaraiedEmployee;
+import model.HourlyEmployee;
+import model.SalariedEmployee;
 
 public class UndoRedo {
 
@@ -46,14 +46,14 @@ public class UndoRedo {
 
 		for (Employee emp : Employee.getEmployees()) {
 			Employee emp2 = null;
-			if (emp instanceof HourlyEmplyee) {
-				emp2 = ((HourlyEmplyee) emp).clone();
+			if (emp instanceof HourlyEmployee) {
+				emp2 = ((HourlyEmployee) emp).clone();
 			}
-			if (emp instanceof ComissionedEmployee) {
-				emp2 = ((ComissionedEmployee) emp).clone();
+			if (emp instanceof CommissionedEmployee) {
+				emp2 = ((CommissionedEmployee) emp).clone();
 			}
-			if (emp instanceof SalaraiedEmployee) {
-				emp2 = ((SalaraiedEmployee) emp).clone();
+			if (emp instanceof SalariedEmployee) {
+				emp2 = ((SalariedEmployee) emp).clone();
 			}
 
 			clonedList.add(emp2);

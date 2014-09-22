@@ -32,8 +32,7 @@ public abstract class Employee implements Cloneable {
 			double monthlyFee, double deduction) {
 		super();
 		
-		System.out.println(admissionDate.getTime());
-		System.out.println("a");
+		
 		this.id = id;
 		this.syndicateId = syndicateId;
 		this.name = name;
@@ -52,7 +51,7 @@ public abstract class Employee implements Cloneable {
 	public Employee(String name, String adress,
 			PaymentMethod paymentMethod, Calendar admissionDate) {
 		super();
-		System.out.println("---------");
+	
 		this.id = Employee.getNextId();
 		this.name = name;
 		this.adress = adress;
@@ -60,9 +59,6 @@ public abstract class Employee implements Cloneable {
 		this.admissionDate = admissionDate;
 		this.lastPayDate = admissionDate;
 		
-
-		System.out.println(admissionDate.getTime());
-		System.out.println(this.getAdmissionDate().getTime());
 		
 	}
 
